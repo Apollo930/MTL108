@@ -21,7 +21,7 @@
 \[\bar{x} = \frac{ \sum_{i=1}^{i=n} {x_i}{f_i} }{\sum_{i=1}^{i=n} f_i}  \]
 
 \subsection{Geometric Mean}
-\[ {\left( \prod_{i=1}^{n} a_i \right)}^{1/n} \]
+\[ GM ={\left( \prod_{i=1}^{n} a_i \right)}^{1/n} \quad = \sqrt[n]{x_1x_2x_3\dots x_n} \]
 
 \subsection{Harmonic Mean}
 \[ H= {\left( \frac{\sum_{i=1}^{n} {x_i}^{-1} }{n}\right)}^{-1}\]
@@ -35,17 +35,264 @@ For grouped data: \[   l+ \left( \frac{f_0 - f_{-1}}{2f_0 - f_{-1} - f_1} \right
 Mean - Mode    (How symmetric the data is about the mean)
 \paragraph{Kurtosis:}
 Change in the slope of the curve
+
+
 \newpage
 \section{Methods of Dispersion}
 \subsection{Standard Deviation}
 \[ 
 s_N \quad= \sqrt{\frac{1}{N} \sum_{i=1}^{N} {(x_i - \bar{x})}^2 } \quad = \sqrt{\overline{{X}^2} - {\overline{X}}^2}
 \]
+
+\subsection{Covariance}
+\[Cov(x,y) \quad 
+= \frac{1}{n} \sum_{i=1}^{m}(x_i-\bar{x})(y_i-\bar{y}) \quad 
+= \frac{1}{\sum f_{ij}} \sum_{i,j} x_i y_i f_{ij} -\bar{x}\bar{y}
+\]
+
 \subsection{Correlation}
-\[Cov(x,y) \quad = \frac{1}{\sum f_{ij}} \sum_{i,j} x_i y_i f_{ij} -\bar{x}\bar{y}\]
+\[r = \frac{cov(x,y)}{\sigma_x \sigma_y} \quad
+= \frac{\frac{1}{n} \sum_{i=1}^{n}(x_i-\bar{x})(y_i-\bar{y})} %numerator%
+{ \sqrt{\frac{1}{n}\sum(x_i - \Bar{x})^2} \sqrt{\frac{1}{n}\sum(y_i -\Bar{y})^2} } \quad %denr% 
+= \frac{\sum(x_i-\Bar{x})(y_i - \Bar{y})} {\sqrt{\sum(x_i-\Bar{x})^2\sum(y_i-\Bar{y})^2}}
+\]
+
 \section{Probability}
+
 \subsection{Axioms:}
 \subsubsection{First Axiom}
+\[ P(E) \in \mathbb{R}, P(E) \geq0 \]
 \subsubsection{Second Axiom}
+\[ P(\Omega)=1\]
 \subsubsection{Third Axiom}
+\[ P\left( \bigcup_{i=1}^{\infty}E_i \right) = \sum_{i=1}^{\infty} P(E_i)\]
+\null\hfill for any countable sequence of disjoint sets $E_{1},E_{2},\ldots$
+
+\begin{itemize}
+\item $ P(E^c) = 1-P(E) $
+\item Conditional Probability: $P(A|B)= \frac{P(A \cap B)}{P(B)}$
+\item If A \& B are independent: $P(A\cap B) = P(A) \cdot P(B)$
+\end{itemize}
+
+
+\subsection{Random Variable and stuff}
+Probability Space:\quad $(\Omega , A, P)$ \quad
+where: 
+\begin{itemize}
+    \item $\Omega$ : Sample space
+    \item A: Event space
+    \item P: Probability Function
+\end{itemize}
+
+Random variable - \quad $X: \Omega \rightarrow \mathbb{R}$ \newline
+
+\subsubsection{Probability Distribution function}
+\[F_X(x) = P([X\leq x]) = P( \{ \omega \in \Omega \mid X(\omega)\leq x\} ) \]
+
+\paragraph{Properties of Distribution Function:}
+\begin{enumerate}
+    \item $ x<y \implies F_X(x) \leq F_X(y) $
+    \item $F_X(x^{+}) := \lim\limits_{h\rightarrow 0^{+}} F_X(x+h) = F_X(x) \quad \forall x \in \mathbb{R}$
+    \item $ \lim\limits_{x\rightarrow - \infty} F_X(x)=0 $
+    \item $ \lim\limits_{x\rightarrow \infty} F_X(x)=1 $
+\end{enumerate}
+
+\subsubsection{Discrete Random Variable}
+The image of X is countable (at most countably infinite $\implies Range(x)= \{ x_1, x_2 \dots \} = \{x_i \mid i \in \mathbb{N} \}$).
+\[ R(x)= \{ x_i \mid i \in \mathbb{N}\} \in \mathbb{R}\]
+
+\paragraph{Probability Mass Function:}
+For each $i \in \mathbb{N},$ let $p_i = P([X=x_i])$
+
+$p: \mathbb{N} \rightarrow [0,1], \quad \quad p(x_i) = p_i$ \newline
+
+\textbf{Properties:}
+\begin{enumerate}
+    \item $p(x_i) \geq 0 \quad \forall i$
+    \item $\sum\limits_{i \in \mathbb{N}}p(x_i) = 1$
+\end{enumerate}
+
+
+$\implies F_X(x) = \sum\limits_{i \in \mathbb{N}} p(i), \quad x_i \leq x$
+
+\paragraph{Expectation: }
+\[ \overline{X}=  E(X) = \sum_i x_i p_i \quad \text{provided } \sum_i p_i |x_i| < \infty\]
+
+\begin{itemize}
+    \item $ |E(X)| \leq E(|X|)$
+    \item $ E(X+Y) = E(X) +E(Y)$
+    \item $ E(cX) = c E(X)$
+\end{itemize}
+\paragraph{Variance:}$\displaystyle{\sum_{i}(x_i-\bar{x})^2p(x_i) = E[X^2]- E(X)^2}$
+
+\subsubsection{Continuous Random Variable}
+The image of X is uncountably infinite (Range is an interval).
+
+\[ F_X(x) = \int_{- \infty}^{x} f(t)\cdot dt \quad \text{where f=probability density function}\]
+\begin{itemize}
+    \item $f(t) \geq 0 \quad \forall t$
+    \item $\int\limits_{- \infty}^{\infty} f(t) \cdot dt =1$
+    \item $\mu_X = E(X) =  \int\limits_{\mathbb{R}}xf(x) dx \quad \text{ provided } \int\limits_{\mathbb{R}}|x|f(x) dx < \infty $
+\end{itemize}
+
+\subsubsection{Composite random variables: }
+\[ f(X) = f \circ X: \mathbb{R} \rightarrow \mathbb{R} \quad\]
+A function of a random variable is also a random variable.
+
+\begin{itemize}
+    \item $E(f(X)) = \int_{\mathbb{R}}f(x)g(x)dx$ \quad where $g(x)=PDF$
+    \item $Var(X) = \displaystyle{E[(X-\mu_X)^2] = \int_{\mathbb{R}}(x-\mu_X)^2f_X (x) dx = E(X^2) - E(X)^2}$
+    \item $Var(aX+b)= a^2 Var(X)$
+\end{itemize}
+
+{\Large <Finding distribution functions>}
+
+\subsubsection{Moment Generating Function}
+\[ M_X(t) = E[e^{tx}]\]
+
+\paragraph{$r^{th} $ moment about origin:}
+$ \mu_{r}^{I} = E(X^r)$
+\newline \newline
+
+$M_X(t)  \displaystyle{\quad = E(e^{tx}) 
+\quad = E\left(\sum_{n=0}^{\infty} \frac{t^n x^n}{n!} \right)
+\quad = \sum_{\infty}^{n=0} \frac{t^n}{n!} E(X^n) }$
+\newline \newline
+
+If the above series is convergent, then $M_X$ is infinitely differentiable \newline
+$ \implies M_X^{'}(t) \mid_{t=0} = E(X) = \mu_1^{'}$ \newline
+$ \implies M_X^{(r)}(t) \mid_{t=0} = \mu_r^{'}$
+\newline \newline
+$M_{ax}(t) = M_X(at)$
+
+\paragraph{Characteristic Function:}
+$\varphi_X (t) := E(e^{itx})$ \newline
+$ |E(e^{itx})| \leq E(|e^{itx}|) = E(1) =1 < \infty$
+
+\subsubsection{Two Dimensional Random Variables}
+$X: \Omega \rightarrow \mathbb{R}^2$
+\newline
+$X = (X_1, X_2 )$ \quad \quad $X_i(\omega) = i^{th}$ coordinate of $X(\omega)$ 
+%More to be inserted here
+\newline
+
+\begin{itemize}
+    \item $F_{X_1, X_2} : \mathbb{R}^2 \rightarrow \mathbb{R}$ \newline
+    $F_{X_1, X_2}(x_1, x_2) = P([X_1 \leq x_1 \cap X_2 \leq x_2])$ \quad : Joint Distribution
+
+    \item $f_{X,Y} = \frac{ \partial ^2 F}{\partial x \partial y}$ is called the joint density function.
+
+    \item $f_X = \int_{\mathbb{R}} f(x,y) dy$ \quad -Marginal density function of X
+
+    \item $p_X = \sum_i p_{ij} $ \quad - Marginal mass function of X (For discrete)
+\end{itemize}
+
+\subsection{Discrete Distributions}
+
+\subsubsection{Binomial Distribution}
+
+\[ P[X=r]= \binom{n}{r} p^r q^{n-r} \]
+
+\begin{itemize}
+    \item $E(X)= np$
+    \item $Var(X)= npq$
+    \item $M_X = E(e^tx) = (e^{t}p+q)^n$
+    \item $\varphi_x(t) = E(e^{itx}) = (e^{it}p+q)^n$
+\end{itemize}
+
+\subsubsection{Poisson Distribution}
+\[ p_r = \frac{e^{-\lambda} \lambda^r}{r!} \]
+\begin{itemize}
+    \item $E(X)= Var(X) = \lambda$
+    \item $ M_X(t) = e^{\lambda (e^t -1) }$
+    \item $ \varphi_X(t) = e^{(e^it -1)}$
+\end{itemize}
+
+
+\subsubsection{Normal Distribution}
+\[  f(x) = \frac{1}{\sqrt{2\pi}\sigma} e^{-\frac{1}{2} \left(\frac{x-\mu}{\sigma}\right)^2}  \]
+\begin{itemize}
+    \item $E(X), Var(X) = \mu,\sigma$
+    \item $M_X(t) = ?$
+    \item $\varphi_X(t) = \frac{1}{\sigma}e^\frac{2\mu\sigma^2it-\sigma^4t^2}{2\sigma^2}$ \quad\quad\quad\quad (?)
+\end{itemize}
+
+
+\subsubsection{Uniform Distribution (Discrete Case)}
+
+\begin{equation}
+f(x)=
+ \begin{cases} 
+      \frac{1}{b-a} & a\leq x \leq b \\
+      0 & b < x
+   \end{cases}
+\end{equation}
+
+\begin{itemize}
+    \item $E(X), Var(X) = \frac{a+b}{2}, \frac{(a-b)^2}{12}$
+    \item $M_X(t)= \frac{e^{bt}-e^{at}}{(b-a)t}$
+    \item $\varphi_X(t) = \frac{e^{ibt}-e^{iat}}{it(b-a)}$
+\end{itemize}
+
+
+\subsubsection{Geometric Distribution}
+
+\subsubsection{Negative Binomial Distribution}
+\[ f(X) = \binom{\alpha+x-1}{x}p^\alpha q^x \]
+$M_X(t) = p^\alpha (1 - q e^t)^-\alpha$
+\subsubsection{Hypergeometric Distribution}
+\[ p_i = \frac{\binom{a}{i}\binom{b}{n-i}}{\binom{a+b}{n}} \]
+Mean = $\frac{na}{a+b}$
+
+\subsection{Continuous Distributions}
+
+\subsubsection{Exponential Distribution}
+\begin{equation}
+f(x)=
+ \begin{cases} 
+      \theta e^{-\theta x} & x\geq 0 \\
+      0 & otherwise
+   \end{cases}
+\end{equation}
+
+\begin{itemize}
+    \item $E(X), Var(X) = ?, ?$
+    \item $M_X(t) = \frac{\theta}{\theta -t}$ \quad $b < \theta$
+    \item $\varphi_X(t) = ?$
+\end{itemize}
+
+
+\subsubsection{Gamma Distribution}
+For $x>0, \quad \Gamma (x) = \int_0^{\infty} t^{x-1}e^{-t} dt$ 
+\newline
+\[ f(x) = \frac{e^{-x}x^{\lambda-1}}{\Gamma \lambda} \quad 0<x<\infty , \lambda>0\]
+\newline
+
+Mean = Variance = $\lambda$
+
+\subsubsection{Beta Distribution}
+\[ f(x) = \frac{x^{\mu-1}(1-x)^{\nu-1}}{\beta(\mu, \nu)} \quad 0<x<1 , \mu>0, \nu>0\]
+\newline
+\begin{itemize}
+    \item $\beta (\mu,\nu)=\int _{0}^{1}t^{\mu-1}(1-t)^{\nu-1} dt$
+    \item $E(X) = \frac{\mu}{\mu+\nu}$
+    \item $Var(X) = \frac{\mu(1+\mu)}{(\mu  +\nu)(\mu+\nu+1)}$
+\end{itemize}
+
+\subsubsection{Cauchy Distribution}
+?
+
+
+\subsection{Theory of Estimation}
+
+\subsubsection{Tchebychev's Inequality}
+\[ P[|X-\mu|\geq k\sigma] \leq \frac{1}{k^2}\]
+
+\begin{itemize}
+    \item $P[|X-\mu|\geq c] \leq \frac{\sigma^2}{c^2}$
+
+\end{itemize}
+
+\subsubsection{Weak Law of Large Numbers}
+
 \end{document}
